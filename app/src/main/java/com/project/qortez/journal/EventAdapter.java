@@ -72,12 +72,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date mDate = null;
         try {
-             mDate = newDateFormat.parse(updatedAt);
+            mDate = newDateFormat.parse(updatedAt);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        String[] parts = mDate.toString().split(" ");
+        String[] parts = new String[0];
+        if (mDate != null) {
+            parts = mDate.toString().split(" ");
+        }
         String dayOfWeek = parts[0];
         String monthOfYear = parts[1] + " " + parts[5];
         String dateOfMonth = parts[2];

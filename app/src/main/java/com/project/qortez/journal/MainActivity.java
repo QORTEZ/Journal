@@ -20,7 +20,7 @@ import com.project.qortez.journal.database.EventEntry;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements EventAdapter.ItemClickListener  {
+public class MainActivity extends AppCompatActivity implements EventAdapter.ItemClickListener {
 
     // Constant for logging
     private static final String TAG = MainActivity.class.getSimpleName();

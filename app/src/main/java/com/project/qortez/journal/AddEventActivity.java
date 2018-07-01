@@ -145,7 +145,7 @@ public class AddEventActivity extends AppCompatActivity {
         String eventDescription = mEditText.getText().toString();
         Date date = new Date();
 
-        final EventEntry event = new EventEntry(eventDescription,date);
+        final EventEntry event = new EventEntry(eventDescription, date);
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {

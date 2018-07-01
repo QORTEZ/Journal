@@ -13,7 +13,7 @@ import android.util.Log;
 
 @Database(entities = {EventEntry.class}, version = 2, exportSchema = false)
 @TypeConverters(DateConverter.class)
-public abstract  class AppDatabase extends RoomDatabase {
+public abstract class AppDatabase extends RoomDatabase {
 
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();

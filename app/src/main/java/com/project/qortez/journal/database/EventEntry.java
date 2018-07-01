@@ -21,7 +21,7 @@ public class EventEntry {
     private Date updatedAt;
 
     @Ignore
-    public EventEntry(String description,Date updatedAt) {
+    public EventEntry(String description, Date updatedAt) {
         this.description = description;
         this.updatedAt = updatedAt;
     }
