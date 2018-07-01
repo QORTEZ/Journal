@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Journal</string>
+    <string name="main_activity_header">Journal</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="update_button">Update</string>
+    <string name="save_event">Save</string>
+    <string name="event_hint">Type here</string>
+</resources>
