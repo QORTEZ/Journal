@@ -27,6 +27,8 @@ public class AddEventActivity extends AppCompatActivity {
     EditText mEditText;
     Button mButton;
 
+    //Test
+
     private int mEventId = DEFAULT_EVENT_ID;
 
     // Member variable for the Database
