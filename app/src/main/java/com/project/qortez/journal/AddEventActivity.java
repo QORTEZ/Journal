@@ -27,8 +27,6 @@ public class AddEventActivity extends AppCompatActivity {
     EditText mEditText;
     Button mButton;
 
-    //Test
-
     private int mEventId = DEFAULT_EVENT_ID;
 
     // Member variable for the Database
@@ -37,7 +35,7 @@ public class AddEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_task);
+        setContentView(R.layout.activity_add_event);
 
         initViews();
 
