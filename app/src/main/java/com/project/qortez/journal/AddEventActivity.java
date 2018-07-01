@@ -9,14 +9,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.project.qortez.journal.database.AppDatabase;
 import com.project.qortez.journal.database.EventEntry;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddEventActivity extends AppCompatActivity {
 
+    // Constant for date format
+    private static final String DATE_FORMAT = "dd/MM/yyy";
     // Extra for the event ID to be received in the intent
     public static final String EXTRA_EVENT_ID = "extraEventId";
     // Extra for the event ID to be received after rotation
@@ -26,11 +32,14 @@ public class AddEventActivity extends AppCompatActivity {
     // Fields for views
     EditText mEditText;
     Button mButton;
+    TextView mDay, mMonth, mDate;
 
     private int mEventId = DEFAULT_EVENT_ID;
 
     // Member variable for the Database
     private AppDatabase mDb;
+    // Date formatter
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +89,9 @@ public class AddEventActivity extends AppCompatActivity {
      */
     private void initViews() {
         mEditText = findViewById(R.id.editTextEventDescription);
+        mDate = findViewById(R.id.tv_date);
+        mDay = findViewById(R.id.tv_day);
+        mMonth = findViewById(R.id.tv_month);
 
         mButton = findViewById(R.id.saveButton);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +112,29 @@ public class AddEventActivity extends AppCompatActivity {
             return;
         }
 
+        //get date, format and split to parts to set up date view
+        String updatedAt = dateFormat.format(event.getUpdatedAt());
+        SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date myDate = null;
+        try {
+            myDate = newDateFormat.parse(updatedAt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String[] parts = new String[0];
+        if (myDate != null) {
+            parts = myDate.toString().split(" ");
+        }
+        String dayOfWeek = parts[0];
+        String monthOfYear = parts[1] + " " + parts[5];
+        String dateOfMonth = parts[2];
+
         mEditText.setText(event.getDescription());
+        mMonth.setText(monthOfYear);
+        mDay.setText(dayOfWeek);
+        mDate.setText(dateOfMonth);
+
     }
 
     /**

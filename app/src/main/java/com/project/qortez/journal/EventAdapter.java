@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.project.qortez.journal.database.EventEntry;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,9 +68,27 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String description = eventEntry.getDescription();
         String updatedAt = dateFormat.format(eventEntry.getUpdatedAt());
 
+        //format the date and split to parts to set up date view
+        SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date mDate = null;
+        try {
+             mDate = newDateFormat.parse(updatedAt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String[] parts = mDate.toString().split(" ");
+        String dayOfWeek = parts[0];
+        String monthOfYear = parts[1] + " " + parts[5];
+        String dateOfMonth = parts[2];
+
+
         //Set values
         holder.eventDescriptionView.setText(description);
-        holder.updatedAtView.setText(updatedAt);
+        holder.dateOfMonthView.setText(dateOfMonth);
+        holder.dayView.setText(dayOfWeek);
+        holder.monthView.setText(monthOfYear);
+
 
     }
 
@@ -105,7 +125,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         // Class variables for the task description and priority TextViews
         TextView eventDescriptionView;
-        TextView updatedAtView;
+        TextView dayView;
+        TextView monthView;
+        TextView dateOfMonthView;
+
 
         /**
          * Constructor for the EventViewHolders.
@@ -116,7 +139,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             super(itemView);
 
             eventDescriptionView = itemView.findViewById(R.id.taskDescription);
-            updatedAtView = itemView.findViewById(R.id.taskUpdatedAt);
+            dayView = itemView.findViewById(R.id.tv_day);
+            monthView = itemView.findViewById(R.id.tv_month);
+            dateOfMonthView = itemView.findViewById(R.id.tv_date);
             itemView.setOnClickListener(this);
         }
 
